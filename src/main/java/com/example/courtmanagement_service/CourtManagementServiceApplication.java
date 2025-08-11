@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CourtmanagementServiceApplication {
+public class CourtManagementServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CourtmanagementServiceApplication.class, args);
+		SpringApplication.run(CourtManagementServiceApplication.class, args);
 	}
 
 }

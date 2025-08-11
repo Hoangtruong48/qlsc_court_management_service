@@ -1,13 +1,15 @@
 package com.example.courtmanagement_service.controller;
 
-import com.example.quanlysancau.request.CourtDetailRequest;
-import com.example.quanlysancau.response.ApiResponse;
-import com.example.quanlysancau.response.CourtDetailResponse;
-import com.example.quanlysancau.service.CourtDetailService;
+
+import com.example.courtmanagement_service.request.CourtDetailRequest;
+import com.example.courtmanagement_service.response.CourtDetailResponse;
+import com.example.courtmanagement_service.service.CourtDetailService;
+import com.qlsc.qlsc_common.response.ApiResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.List;
 

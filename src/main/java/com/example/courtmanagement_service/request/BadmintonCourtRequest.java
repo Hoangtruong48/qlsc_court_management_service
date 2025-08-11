@@ -1,7 +1,8 @@
 package com.example.courtmanagement_service.request;
 
-import com.example.quanlysancau.entity.BadmintonCourt;
-import com.example.quanlysancau.util.Mappable;
+
+import com.example.courtmanagement_service.entity.BadmintonCourt;
+import com.qlsc.qlsc_common.mappable.Mappable;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;

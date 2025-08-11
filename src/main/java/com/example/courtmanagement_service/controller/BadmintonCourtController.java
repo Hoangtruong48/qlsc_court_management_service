@@ -1,8 +1,9 @@
 package com.example.courtmanagement_service.controller;
 
-import com.example.quanlysancau.request.BadmintonCourtRequest;
-import com.example.quanlysancau.response.ApiResponse;
-import com.example.quanlysancau.service.BadmintonCourtService;
+
+import com.example.courtmanagement_service.request.BadmintonCourtRequest;
+import com.example.courtmanagement_service.service.BadmintonCourtService;
+import com.qlsc.qlsc_common.response.ApiResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

@@ -1,6 +1,6 @@
 package com.example.courtmanagement_service.service.generate_data;
 
-import com.example.quanlysancau.entity.BadmintonCourt;
+import com.example.courtmanagement_service.entity.BadmintonCourt;
 import org.springframework.stereotype.Service;
 
 import java.util.Random;

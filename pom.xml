@@ -11,32 +11,12 @@
 	<groupId>com.example</groupId>
 	<artifactId>courtmanagement_service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>courtmanagement_service</name>
 	<description>CourtManagementService</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
+
 	<properties>
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
-
-		<dependency>
-			<groupId>com.example</groupId>
-			<artifactId>qlsc_common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -58,6 +38,13 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
+
+		<dependency>
+			<groupId>com.dts</groupId>
+			<artifactId>qlsc_common</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>

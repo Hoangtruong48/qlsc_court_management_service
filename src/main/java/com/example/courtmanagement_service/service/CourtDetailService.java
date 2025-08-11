@@ -1,10 +1,10 @@
 package com.example.courtmanagement_service.service;
 
-import com.example.quanlysancau.entity.CourtDetail;
-import com.example.quanlysancau.repo.CourtDetailRepository;
-import com.example.quanlysancau.request.CourtDetailRequest;
-import com.example.quanlysancau.response.ApiResponse;
-import com.example.quanlysancau.response.CourtDetailResponse;
+import com.example.courtmanagement_service.entity.CourtDetail;
+import com.example.courtmanagement_service.repo.CourtDetailRepository;
+import com.example.courtmanagement_service.request.CourtDetailRequest;
+import com.example.courtmanagement_service.response.CourtDetailResponse;
+import com.qlsc.qlsc_common.response.ApiResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
