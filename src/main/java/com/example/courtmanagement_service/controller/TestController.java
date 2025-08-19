@@ -1,6 +1,6 @@
 package com.example.courtmanagement_service.controller;
 
-import com.example.quanlysancau.response.ApiResponse;
+import com.qlsc.qlsc_common.response.ApiResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;

@@ -48,6 +48,7 @@ public class BadmintonCourtGeneratorService {
                 .hasDrinksService(random.nextBoolean())
                 .createdAt(System.currentTimeMillis())
                 .updatedAt(System.currentTimeMillis())
+                .createdBy("GENERATOR DATA")
                 .build();
     }
 

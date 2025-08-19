@@ -1,13 +1,17 @@
 package com.example.courtmanagement_service.service;
 
 import com.example.courtmanagement_service.entity.BadmintonCourt;
-import com.example.courtmanagement_service.repo.BadmintonCourtRepository;
+import com.example.courtmanagement_service.repo.jpa.BadmintonCourtRepoJpa;
+import com.example.courtmanagement_service.repo.jpa.CourtDetailRepoJpa;
 import com.example.courtmanagement_service.request.BadmintonCourtRequest;
 import com.example.courtmanagement_service.response.BadmintonCourtResponse;
 import com.qlsc.qlsc_common.response.ApiResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -20,10 +24,12 @@ import java.util.stream.Collectors;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class BadmintonCourtService {
 
-    BadmintonCourtRepository repository;
+    BadmintonCourtRepoJpa badmintonCourtRepoJpa;
+    CourtDetailRepoJpa courtDetailRepository;
+    Logger LOG = LoggerFactory.getLogger(this.getClass());
 
     public ApiResponse<List<BadmintonCourtResponse>> getAll() {
-        List<BadmintonCourtResponse> list = repository.findAll()
+        List<BadmintonCourtResponse> list = badmintonCourtRepoJpa.findAll()
                 .stream()
                 .map(this::toResponse)
                 .collect(Collectors.toList());
@@ -36,7 +42,7 @@ public class BadmintonCourtService {
     }
 
     public ApiResponse<BadmintonCourtResponse> getById(Integer id) {
-        return repository.findById(id)
+        return badmintonCourtRepoJpa.findById(id)
                 .map(court -> ApiResponse.<BadmintonCourtResponse>builder()
                         .statusCode(0)
                         .message("Success")
@@ -59,7 +65,7 @@ public class BadmintonCourtService {
         }
 
         BadmintonCourt court = request.toEntity();
-        repository.save(court);
+        badmintonCourtRepoJpa.save(court);
 
         response.setDataSuccess(toResponse(court));
         return response;
@@ -74,7 +80,7 @@ public class BadmintonCourtService {
             return response;
         }
 
-        BadmintonCourt court = repository.findById(id)
+        BadmintonCourt court = badmintonCourtRepoJpa.findById(id)
                 .orElse(null);
         if (court == null) {
             response.setMessageFailed("Court not found");
@@ -97,19 +103,23 @@ public class BadmintonCourtService {
         court.setHasDrinksService(request.getHasDrinksService());
         court.setUpdatedAt(Instant.now().toEpochMilli());
 
-        repository.save(court);
+        badmintonCourtRepoJpa.save(court);
 
         response.setDataSuccess(toResponse(court));
         return response;
     }
 
-    public ApiResponse<?> delete(Integer id) {
+    public ApiResponse<?> delete(Integer id) throws ChangeSetPersister.NotFoundException {
         ApiResponse<?> response = new ApiResponse<>();
-        if (!repository.existsById(id)) {
+        if (!badmintonCourtRepoJpa.existsById(id)) {
             response.setMessageFailed("Court not found");
             return response;
         }
-        repository.deleteById(id);
+        BadmintonCourt court = badmintonCourtRepoJpa.findById(id)
+                .orElseThrow(ChangeSetPersister.NotFoundException::new);
+
+        int totalCourtDetail = courtDetailRepository.deleteByCourtId(court.getId());
+        LOG.info("Court deleted successfully court detail size = {}", totalCourtDetail);
         response.setMessageSuccess("Court deleted successfully");
         return response;
     }

@@ -7,18 +7,28 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update # ho?c 'validate' khi deploy production
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         format_sql: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
 server:
-  port: 8081
+  port: 8082
+#  servlet:
+#    context-path: /court-management
 
 logging :
   level :
     org.springframework.security : DEBUG
+
+#springdoc:
+#  api-docs:
+#    path: /v3/api-docs       # JSON
+#    enabled: true
+#  swagger-ui:
+#    path: /swagger-ui.html   # UI
+#    enabled: true
 
 #jwt :
 #  signer_key : "H/iI+s4RM9/p2zSeTtC5u9HM9QzH1IHLZYV/yOVTwf9hCvfaxKwl19hRm0Hw3344"

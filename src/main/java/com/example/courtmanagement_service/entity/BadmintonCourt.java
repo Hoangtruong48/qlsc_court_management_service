@@ -34,6 +34,8 @@ public class BadmintonCourt {
         public static final String HAS_DRINKS_SERVICE = "has_drinks_service";
         public static final String CREATED_AT = "created_at";
         public static final String UPDATED_AT = "updated_at";
+        public static final String CREATED_BY = "created_by";
+        public static final String UPDATED_BY = "updated_by";
     }
 
     @Id
@@ -86,4 +88,10 @@ public class BadmintonCourt {
 
     @Column(name = BadmintonCourtConstant.UPDATED_AT)
     Long updatedAt;
+
+    @Column(name = BadmintonCourtConstant.CREATED_BY)
+    String createdBy;
+
+    @Column(name = BadmintonCourtConstant.UPDATED_BY)
+    String updatedBy;
 }

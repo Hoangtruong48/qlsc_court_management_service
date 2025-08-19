@@ -1,7 +1,7 @@
 package com.example.courtmanagement_service.service;
 
 import com.example.courtmanagement_service.entity.CourtDetail;
-import com.example.courtmanagement_service.repo.CourtDetailRepository;
+import com.example.courtmanagement_service.repo.jpa.CourtDetailRepoJpa;
 import com.example.courtmanagement_service.request.CourtDetailRequest;
 import com.example.courtmanagement_service.response.CourtDetailResponse;
 import com.qlsc.qlsc_common.response.ApiResponse;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CourtDetailService {
-    CourtDetailRepository repository;
+    CourtDetailRepoJpa repository;
 
     public ApiResponse<List<CourtDetailResponse>> getAll() {
         List<CourtDetailResponse> list = repository.findAll()
