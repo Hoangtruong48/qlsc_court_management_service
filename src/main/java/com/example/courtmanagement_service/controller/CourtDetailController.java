@@ -2,6 +2,7 @@ package com.example.courtmanagement_service.controller;
 
 
 import com.example.courtmanagement_service.request.CourtDetailRequest;
+import com.example.courtmanagement_service.request.base_request.BaseDeleteRequest;
 import com.example.courtmanagement_service.response.CourtDetailResponse;
 import com.example.courtmanagement_service.service.CourtDetailService;
 import com.qlsc.qlsc_common.response.ApiResponse;
@@ -61,6 +62,14 @@ public class CourtDetailController {
         LOG.info("Start API delete court detail by id: {}", id);
         ApiResponse<?> response = service.delete(id);
         LOG.info("End API delete court detail by id: {}", id);
+        return response;
+    }
+
+    @PostMapping("/update-status")
+    public ApiResponse<?> updateStatus(@RequestBody BaseDeleteRequest request)  {
+        LOG.info("Start API delete badminton court by request : {}", request);
+        ApiResponse<?> response = service.updateStatusCourtDetail(request);
+        LOG.info("End API delete badminton court by request: {}", request);
         return response;
     }
 }

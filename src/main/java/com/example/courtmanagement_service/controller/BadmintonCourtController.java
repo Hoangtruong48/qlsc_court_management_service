@@ -2,6 +2,7 @@ package com.example.courtmanagement_service.controller;
 
 
 import com.example.courtmanagement_service.request.BadmintonCourtRequest;
+import com.example.courtmanagement_service.request.base_request.BaseDeleteRequest;
 import com.example.courtmanagement_service.service.BadmintonCourtService;
 import com.qlsc.qlsc_common.response.ApiResponse;
 import lombok.AccessLevel;
@@ -20,6 +21,18 @@ public class BadmintonCourtController {
     BadmintonCourtService service;
 
     Logger LOG = LoggerFactory.getLogger(BadmintonCourtController.class);
+
+
+    @GetMapping("/test-get-specification")
+    public ApiResponse<?> getTestGet(@RequestParam String email,
+                                     @RequestParam Integer status,
+                                     @RequestParam Integer start,
+                                     @RequestParam Integer limit) {
+        LOG.info("Start API test get: {}, {}", email, status);
+        ApiResponse<?> response = service.getLstBadmintonCourt(email, status, start, limit);
+        LOG.info("End API test get");
+        return response;
+    }
 
     @GetMapping("/get-all")
     public ApiResponse<?> getAll() {
@@ -61,4 +74,14 @@ public class BadmintonCourtController {
         LOG.info("End API delete badminton court by id: {}", id);
         return response;
     }
+
+    @PostMapping("/update-status")
+    public ApiResponse<?> updateStatus(@RequestBody BaseDeleteRequest request)  {
+        LOG.info("Start API delete badminton court by request : {}", request);
+        ApiResponse<?> response = service.updateStatus(request);
+        LOG.info("End API delete badminton court by request: {}", request);
+        return response;
+    }
+
+
 }

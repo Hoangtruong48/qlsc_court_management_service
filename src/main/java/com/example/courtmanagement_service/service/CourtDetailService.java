@@ -3,15 +3,20 @@ package com.example.courtmanagement_service.service;
 import com.example.courtmanagement_service.entity.CourtDetail;
 import com.example.courtmanagement_service.repo.jpa.CourtDetailRepoJpa;
 import com.example.courtmanagement_service.request.CourtDetailRequest;
+import com.example.courtmanagement_service.request.base_request.BaseDeleteRequest;
 import com.example.courtmanagement_service.response.CourtDetailResponse;
+import com.qlsc.qlsc_common.constant.BadmintonConstant;
 import com.qlsc.qlsc_common.response.ApiResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,9 +25,11 @@ import java.util.stream.Collectors;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CourtDetailService {
     CourtDetailRepoJpa repository;
+    Logger LOG = LoggerFactory.getLogger(this.getClass());
 
     public ApiResponse<List<CourtDetailResponse>> getAll() {
-        List<CourtDetailResponse> list = repository.findAll()
+        List<CourtDetailResponse> list = repository
+                .findAllByStatusIs(BadmintonConstant.STATUS_ON).orElse(new ArrayList<>())
                 .stream()
                 .map(this::toResponse)
                 .collect(Collectors.toList());
@@ -35,7 +42,7 @@ public class CourtDetailService {
     }
 
     public ApiResponse<CourtDetailResponse> getById(Integer id) {
-        return repository.findById(id)
+        return repository.findByIdAndStatusIs(id, BadmintonConstant.STATUS_ON)
                 .map(detail -> ApiResponse.<CourtDetailResponse>builder()
                         .statusCode(0)
                         .message("Success")
@@ -114,5 +121,24 @@ public class CourtDetailService {
                 .createdAt(detail.getCreatedAt())
                 .updatedAt(detail.getUpdatedAt())
                 .build();
+    }
+
+    public ApiResponse<?> updateStatusCourtDetail(BaseDeleteRequest request) {
+        ApiResponse<Integer> response = new ApiResponse<>();
+        String msgError = request.validate();
+        if (msgError != null) {
+            return response.setMessageFailed(msgError);
+        }
+        long countRecord = repository.countAllByIdIn(request.getIds());
+        if (countRecord != request.getIds().size()) {
+            return response.setMessageFailed("BadmintonCourt update failed because item not exists");
+        }
+
+        long totalUpdateCourtDetail = repository.updateStatusCourtDetailByCourtIdIn(
+                request.getIds(), request.getStatus());
+
+        LOG.info("Total record court detail updated = {}", totalUpdateCourtDetail);
+
+        return response.setMessageSuccess("Update successfully " + totalUpdateCourtDetail + "court detail");
     }
 }

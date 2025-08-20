@@ -33,22 +33,7 @@ public class CourtDetail {
         public static final String CREATED_BY = "created_by";
         public static final String UPDATED_BY = "updated_by";
     }
-    public static int TYPE_VIP = 1;
-    public static int TYPE_NORMAL = 2;
-    public static List<Integer> listCourtType = new ArrayList<>(){
-        {
-            add(TYPE_VIP);
-            add(TYPE_NORMAL);
-        }
-    };
-    public static int STATUS_ON = 1;
-    public static int STATUS_OFF = 2;
-    public static List<Integer> listStatus = new ArrayList<>(){
-        {
-            add(STATUS_ON);
-            add(STATUS_OFF);
-        }
-    };
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = CourtDetailConstant.ID)

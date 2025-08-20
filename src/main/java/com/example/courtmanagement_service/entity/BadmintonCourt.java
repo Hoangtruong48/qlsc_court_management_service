@@ -4,6 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -21,6 +25,7 @@ public class BadmintonCourt {
         public static final String ID = "id";
         public static final String NAME = "name";
         public static final String ADDRESS = "address";
+        public static final String STATUS = "status";
         public static final String DESCRIPTION = "description";
         public static final String OPENING_TIME = "opening_time";
         public static final String CLOSING_TIME = "closing_time";
@@ -36,6 +41,21 @@ public class BadmintonCourt {
         public static final String UPDATED_AT = "updated_at";
         public static final String CREATED_BY = "created_by";
         public static final String UPDATED_BY = "updated_by";
+    }
+
+    @Transient
+    public static final Map<String, String> FIELD_TO_COLUMN_MAP = new HashMap<>();
+    @Transient
+    public static final Map<String, String> COLUMN_TO_FIELD_MAP = new HashMap<>();
+
+    static {
+        for (Field field : BadmintonCourt.class.getDeclaredFields()) {
+            Column column = field.getAnnotation(Column.class);
+            if (column != null) {
+                FIELD_TO_COLUMN_MAP.put(field.getName(), column.name());
+                COLUMN_TO_FIELD_MAP.put(column.name(), field.getName());
+            }
+        }
     }
 
     @Id
@@ -94,4 +114,7 @@ public class BadmintonCourt {
 
     @Column(name = BadmintonCourtConstant.UPDATED_BY)
     String updatedBy;
+
+    @Column(name = BadmintonCourtConstant.STATUS)
+    Integer status;
 }

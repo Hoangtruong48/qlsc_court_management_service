@@ -5,6 +5,7 @@ import com.example.courtmanagement_service.entity.BadmintonCourt;
 import com.example.courtmanagement_service.entity.CourtDetail;
 import com.example.courtmanagement_service.repo.jpa.BadmintonCourtRepoJpa;
 import com.example.courtmanagement_service.repo.jpa.CourtDetailRepoJpa;
+import com.qlsc.qlsc_common.constant.BadmintonConstant;
 import com.qlsc.qlsc_common.response.ApiResponse;
 import com.qlsc.qlsc_common.util.NumberUtils;
 import lombok.AccessLevel;
@@ -40,19 +41,20 @@ public class CourtDetailGeneratorService {
         int totalCourt = badmintonCourt.getTotalCourts();
         int courtId = badmintonCourt.getId();
         int numberCourt = 1;
-        int size = CourtDetail.listCourtType.size();
+        int size = BadmintonConstant.listCourtType.size();
         double pricePerHouse = 0.0;
         int countType = 0;
-        int status = CourtDetail.STATUS_ON;
-        pricePerHouse = NumberUtils.roundToNearestBase(pricePerHouse, BASE_ROUND_NUMBER);
+        int status = BadmintonConstant.STATUS_ON;
+
         long timeNow = System.currentTimeMillis();
         for (int i = 0; i < totalCourt; i++) {
-            countType = CourtDetail.listCourtType.get(rand.nextInt(size));
-            if (countType == CourtDetail.TYPE_NORMAL) {
+            countType = BadmintonConstant.listCourtType.get(rand.nextInt(size));
+            if (countType == BadmintonConstant.TYPE_NORMAL) {
                 pricePerHouse = rand.nextDouble(MIN_NORMAL, MAX_NORNAL);
-            } else if (countType == CourtDetail.TYPE_VIP) {
+            } else if (countType == BadmintonConstant.TYPE_VIP) {
                 pricePerHouse = rand.nextDouble(MIN_VIP, MAX_VIP);
             }
+            pricePerHouse = NumberUtils.roundToNearestBase(pricePerHouse, BASE_ROUND_NUMBER);
             lst.add(
                     CourtDetail.builder()
                             .courtId(courtId)
