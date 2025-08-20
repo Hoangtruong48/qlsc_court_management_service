@@ -26,6 +26,7 @@ public class BadmintonCourtRequest implements Mappable<BadmintonCourt> {
     Boolean hasShower;
     Boolean hasParking;
     Boolean hasDrinksService;
+    Integer status;
 
     @Override
     public BadmintonCourt toEntity() {
@@ -43,6 +44,7 @@ public class BadmintonCourtRequest implements Mappable<BadmintonCourt> {
                 .hasShower(this.hasShower)
                 .hasParking(this.hasParking)
                 .hasDrinksService(this.hasDrinksService)
+                .status(this.status)
                 .createdAt(Instant.now().toEpochMilli())
                 .updatedAt(Instant.now().toEpochMilli())
                 .build();
