@@ -62,15 +62,12 @@ public class BadmintonCourtGeneratorService {
         return sb.toString();
     }
 
-    private static String randomOpeningTime() {
-        int hour = ThreadLocalRandom.current().nextInt(5, 9);
-        int minute = ThreadLocalRandom.current().nextInt(0, 2) * 30;
-        return String.format("%dh%02d", hour, minute);
+    private static Integer randomOpeningTime() {
+       return ThreadLocalRandom.current().nextInt(5, 9);
+
     }
 
-    private static String randomClosingTime() {
-        int hour = ThreadLocalRandom.current().nextInt(21, 24);
-        int minute = ThreadLocalRandom.current().nextInt(0, 2) * 30;
-        return String.format("%dh%02d", hour, minute);
+    private static Integer randomClosingTime() {
+        return ThreadLocalRandom.current().nextInt(21, 24);
     }
 }

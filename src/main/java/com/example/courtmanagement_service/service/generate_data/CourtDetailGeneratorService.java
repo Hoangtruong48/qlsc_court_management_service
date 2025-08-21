@@ -1,6 +1,5 @@
 package com.example.courtmanagement_service.service.generate_data;
 
-import com.example.courtmanagement_service.dto.CourtDetailCountDTO;
 import com.example.courtmanagement_service.entity.BadmintonCourt;
 import com.example.courtmanagement_service.entity.CourtDetail;
 import com.example.courtmanagement_service.repo.jpa.BadmintonCourtRepoJpa;

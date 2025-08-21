@@ -73,10 +73,10 @@ public class BadmintonCourt {
     String description;
     // thời gian mở cửa
     @Column(name = BadmintonCourtConstant.OPENING_TIME, nullable = false)
-    String openingTime;
+    Integer openingTime;
     // thời gian đóng
     @Column(name = BadmintonCourtConstant.CLOSING_TIME, nullable = false)
-    String closingTime;
+    Integer closingTime;
     // số sân
     @Column(name = BadmintonCourtConstant.TOTAL_COURTS, nullable = false)
     Integer totalCourts;

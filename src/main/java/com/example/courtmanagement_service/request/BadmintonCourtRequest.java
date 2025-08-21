@@ -16,8 +16,8 @@ public class BadmintonCourtRequest implements Mappable<BadmintonCourt> {
     String name;
     String address;
     String description;
-    String openingTime;
-    String closingTime;
+    Integer openingTime;
+    Integer closingTime;
     Integer totalCourts;
     String contactPhone;
     String contactEmail;
@@ -59,6 +59,18 @@ public class BadmintonCourtRequest implements Mappable<BadmintonCourt> {
         }
         if (totalCourts == null || totalCourts <= 0) {
             return "Total courts must be greater than 0";
+        }
+        if (openingTime == null || closingTime == null) {
+            return "OpeningTime và ClosingTime không được null";
+        }
+        if (openingTime < 0 || openingTime > 24) {
+            return "OpeningTime phải nằm trong khoảng [0, 24]";
+        }
+        if (closingTime < 0 || closingTime > 24) {
+            return "ClosingTime phải nằm trong khoảng [0, 24]";
+        }
+        if (openingTime >= closingTime) {
+            return "OpeningTime phải nhỏ hơn ClosingTime";
         }
         return null;
     }

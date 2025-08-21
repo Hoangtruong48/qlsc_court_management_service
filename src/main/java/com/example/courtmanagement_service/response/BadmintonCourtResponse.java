@@ -13,8 +13,8 @@ public class BadmintonCourtResponse {
     String name;
     String address;
     String description;
-    String openingTime;
-    String closingTime;
+    Integer openingTime;
+    Integer closingTime;
     Integer totalCourts;
     String contactPhone;
     String contactEmail;
