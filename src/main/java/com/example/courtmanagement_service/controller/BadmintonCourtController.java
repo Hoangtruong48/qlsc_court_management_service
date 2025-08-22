@@ -1,6 +1,7 @@
 package com.example.courtmanagement_service.controller;
 
 
+import com.example.courtmanagement_service.dto.BadmintonInfoTimeDTO;
 import com.example.courtmanagement_service.request.BadmintonCourtRequest;
 import com.example.courtmanagement_service.request.base_request.BaseDeleteRequest;
 import com.example.courtmanagement_service.service.BadmintonCourtService;
@@ -12,6 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/badminton-courts")
@@ -82,6 +85,16 @@ public class BadmintonCourtController {
         LOG.info("End API delete badminton court by request: {}", request);
         return response;
     }
+
+    @GetMapping("/get-info-time-court-detail")
+    public ApiResponse<List<BadmintonInfoTimeDTO>> getInfoTimeCourtDetail(@RequestParam List<Integer> courtIds) {
+        LOG.info("Start API get time badminton court by courtIds : {}", courtIds);
+        ApiResponse<List<BadmintonInfoTimeDTO>> response = service.getInfoTimeCourtDetail(courtIds);
+        LOG.info("End API get time badminton court by courtIds : {}", courtIds);
+        return response;
+    }
+
+
 
 
 }

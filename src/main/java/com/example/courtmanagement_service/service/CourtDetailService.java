@@ -1,9 +1,11 @@
 package com.example.courtmanagement_service.service;
 
+import com.example.courtmanagement_service.dto.BadmintonInfoTimeDTO;
 import com.example.courtmanagement_service.entity.CourtDetail;
 import com.example.courtmanagement_service.repo.jpa.CourtDetailRepoJpa;
 import com.example.courtmanagement_service.request.CourtDetailRequest;
 import com.example.courtmanagement_service.request.base_request.BaseDeleteRequest;
+import com.example.courtmanagement_service.response.BadmintonCourtResponse;
 import com.example.courtmanagement_service.response.CourtDetailResponse;
 import com.qlsc.qlsc_common.constant.BadmintonConstant;
 import com.qlsc.qlsc_common.response.ApiResponse;
@@ -141,4 +143,16 @@ public class CourtDetailService {
 
         return response.setMessageSuccess("Update successfully " + totalUpdateCourtDetail + "court detail");
     }
+
+//    public ApiResponse<List<BadmintonInfoTimeDTO>> getInfoTimeCourtDetail(List<Integer> ids) {
+//        LOG.info("Start getInfoTimeCourtDetail");
+//        List<Object[]> rawData = repository.getInfoTimeCourtDetailByListCourtId(ids);
+//        List<BadmintonInfoTimeDTO> lstData = BadmintonInfoTimeDTO.convertRawDataToDTO(rawData);
+//        LOG.info("End getInfoTimeCourtDetail");
+//        return ApiResponse.<List<BadmintonInfoTimeDTO>>builder()
+//                .data(lstData)
+//                .total((long) lstData.size())
+//                .statusCode(0)
+//                .build();
+//    }
 }

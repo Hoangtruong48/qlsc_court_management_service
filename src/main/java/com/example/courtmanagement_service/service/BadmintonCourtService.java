@@ -1,5 +1,6 @@
 package com.example.courtmanagement_service.service;
 
+import com.example.courtmanagement_service.dto.BadmintonInfoTimeDTO;
 import com.example.courtmanagement_service.entity.BadmintonCourt;
 import com.example.courtmanagement_service.repo.jpa.BadmintonCourtRepoJpa;
 import com.example.courtmanagement_service.repo.jpa.CourtDetailRepoJpa;
@@ -194,5 +195,18 @@ public class BadmintonCourtService {
         return response.setMessageSuccess("Update successfully " + total + "badminton court" + "and "
                 + totalUpdateCourtDetail + "court detail");
 
+    }
+
+    public ApiResponse<List<BadmintonInfoTimeDTO>> getInfoTimeCourtDetail(List<Integer> ids) {
+        LOG.info("Start getInfoTimeCourtDetail");
+        List<Object[]> rawData = badmintonCourtRepoJpa.getInfoTimeCourtDetailByListCourtId(ids);
+        LOG.info("rawData size = {}", rawData.size());
+        List<BadmintonInfoTimeDTO> lstData = BadmintonInfoTimeDTO.convertRawDataToDTO(rawData);
+        LOG.info("End getInfoTimeCourtDetail");
+        return ApiResponse.<List<BadmintonInfoTimeDTO>>builder()
+                .data(lstData)
+                .total((long) lstData.size())
+                .statusCode(0)
+                .build();
     }
 }

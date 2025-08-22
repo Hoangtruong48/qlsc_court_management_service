@@ -43,4 +43,14 @@ public interface BadmintonCourtRepoJpa extends JpaRepository<BadmintonCourt, Int
         """, nativeQuery = true)
     int updateStatusBadmintonCourtByIdIn(@Param("ids") List<Integer> ids, @Param("status") Integer status);
 
+    @Query(value = """
+            with info_badminton as (select bc.opening_time, bc.closing_time, bc.id
+                                    from badminton.badminton_courts bc
+                                    where id IN (:ids))
+            select cd.court_id, cd.court_number, ib.opening_time, ib.closing_time
+            from badminton.court_details cd
+                     join info_badminton ib on cd.court_id = ib.id
+            order by cd.court_id;
+            """, nativeQuery = true)
+    List<Object[]> getInfoTimeCourtDetailByListCourtId(@Param("ids") List<Integer> ids);
 }

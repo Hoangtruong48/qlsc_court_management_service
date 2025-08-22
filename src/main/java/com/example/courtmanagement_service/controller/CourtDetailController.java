@@ -1,6 +1,7 @@
 package com.example.courtmanagement_service.controller;
 
 
+import com.example.courtmanagement_service.dto.BadmintonInfoTimeDTO;
 import com.example.courtmanagement_service.request.CourtDetailRequest;
 import com.example.courtmanagement_service.request.base_request.BaseDeleteRequest;
 import com.example.courtmanagement_service.response.CourtDetailResponse;
@@ -72,4 +73,12 @@ public class CourtDetailController {
         LOG.info("End API delete badminton court by request: {}", request);
         return response;
     }
+
+//    @GetMapping("/get-info-time-court-detail")
+//    public ApiResponse<List<BadmintonInfoTimeDTO>> getInfoTimeCourtDetail(@RequestParam List<Integer> courtIds) {
+//        LOG.info("Start API get time badminton court by courtIds : {}", courtIds);
+//        ApiResponse<List<BadmintonInfoTimeDTO>> response = service.getInfoTimeCourtDetail(courtIds);
+//        LOG.info("Start API get time badminton court by courtIds : {}", courtIds);
+//        return response;
+//    }
 }
