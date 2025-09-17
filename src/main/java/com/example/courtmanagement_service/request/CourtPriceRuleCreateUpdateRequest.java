@@ -2,7 +2,7 @@ package com.example.courtmanagement_service.request;
 
 import com.example.courtmanagement_service.entity.CourtPriceRule;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.qlsc.qlsc_common.util.NumberUtils;
+import com.qlsc.qlsc_common.util.NumberQlscUtils;
 import jakarta.persistence.Column;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -36,7 +36,7 @@ public class CourtPriceRuleCreateUpdateRequest {
         if (endTime == null) {
             return "endTime is required";
         }
-        if (factor == null || NumberUtils.compareDouble(factor, 0.0) == -1) {
+        if (factor == null || NumberQlscUtils.compareDouble(factor, 0.0) == -1) {
             return "percent is required";
         }
         if (days == null || days.isEmpty()) {

@@ -38,7 +38,7 @@ public class DataGeneratorController {
         }
         repository.saveAll(courts);
         return ApiResponse.builder()
-                .data(courts)
+                .data(courts.size())
                 .message("Success")
                 .statusCode(0)
                 .build();

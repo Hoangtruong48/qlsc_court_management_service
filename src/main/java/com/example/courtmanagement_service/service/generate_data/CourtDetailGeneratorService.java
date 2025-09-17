@@ -6,7 +6,7 @@ import com.example.courtmanagement_service.repo.jpa.BadmintonCourtRepoJpa;
 import com.example.courtmanagement_service.repo.jpa.CourtDetailRepoJpa;
 import com.qlsc.qlsc_common.constant.BadmintonConstant;
 import com.qlsc.qlsc_common.response.ApiResponse;
-import com.qlsc.qlsc_common.util.NumberUtils;
+import com.qlsc.qlsc_common.util.NumberQlscUtils;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -53,7 +53,7 @@ public class CourtDetailGeneratorService {
             } else if (countType == BadmintonConstant.TYPE_VIP) {
                 pricePerHouse = rand.nextDouble(MIN_VIP, MAX_VIP);
             }
-            pricePerHouse = NumberUtils.roundToNearestBase(pricePerHouse, BASE_ROUND_NUMBER);
+            pricePerHouse = NumberQlscUtils.roundToNearestBase(pricePerHouse, BASE_ROUND_NUMBER);
             lst.add(
                     CourtDetail.builder()
                             .courtId(courtId)
