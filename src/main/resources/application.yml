@@ -19,6 +19,7 @@ server:
 #    context-path: /court-management
 
 logging :
+  config: classpath:log4j-dev.xml
   level :
     org.springframework.security : DEBUG
 
